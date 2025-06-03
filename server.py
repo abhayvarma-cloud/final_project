@@ -10,12 +10,15 @@ def emotion_detect():
     print(emotion_text)
     response = emotion_detector(emotion_text)
    
-
     formatted_text ="""For the given statement, the system response is 'anger': {}, 'disgust': {}, 
     'fear': {}, 'joy': 0.9680386 and 'sadness': {}. The dominant emotion is {}.""".format(response["anger"],
     response["disgust"], response["fear"], response["joy"], response["dominant_emotion"]
     )
-    return formatted_text
+
+    if response["dominant_emotion"] == "None":
+        return "Invalid text! Please try again!."
+    else:
+        return formatted_text
     
 @app.route("/")
 def render_index_page():
